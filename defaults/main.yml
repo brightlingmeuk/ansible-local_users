@@ -1,0 +1,13 @@
+---
+# defaults file for shadow
+#
+
+# Options include: managed, present,
+local_users_state: 'managed'
+
+local_users_accounts: {}
+local_users_groups: {}
+
+local_users_managed_uids: "{{ _local_users_managed_uids }}"
+
+local_users_managed_gids: "{{ _local_users_managed_gids }}"

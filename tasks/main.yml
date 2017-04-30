@@ -1,0 +1,23 @@
+---
+# tasks file for shadow
+#
+
+- name: include distribution specific variables
+  include_vars: "{{ item }}"
+  with_first_found: 
+    - files:
+        - "{{ ansible_distribution | lower }}_{{ ansible_distribution_major_version}}.yml"
+        - "{{ ansible_distribution | lower }}_{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      skip: true
+
+- name: Import state task file
+  include: "{{ state_file }}"
+  with_first_found:
+    - files:
+      - "{{ local_users_state | lower }}_{{ ansible_distribution | lower }}.yml"
+      - "{{ local_users_state | lower }}_{{ ansible_os_family | lower }}.yml"
+      - "{{ local_users_state | lower }}_default.yml"
+  loop_control:
+    loop_var: state_file

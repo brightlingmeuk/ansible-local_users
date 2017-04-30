@@ -1,0 +1,30 @@
+galaxy_info:
+  author: Robert White
+  description: Package to manage users and groups on a system. 
+
+  license: GPLv3
+
+  min_ansible_version: 2.0
+
+  platforms:
+  - name: GenericLinux
+    versions:
+    - all
+    - any
+  - name: Debian
+    versions:
+    - all
+    - jessie
+  - name: EL
+    versions:
+    - all
+    - 7
+
+  galaxy_tags:
+    - users
+    - groups
+    - shadow
+    - system
+    - shadow-utils
+
+dependencies: []

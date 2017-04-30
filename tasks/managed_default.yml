@@ -1,0 +1,33 @@
+---
+
+- name: Get passswd contents
+  command: '/usr/bin/getent passwd'
+  changed_when: false
+  check_mode: no
+  register: _local_users_getent_passwd
+
+- name: Get group content
+  command: '/usr/bin/getent group'
+  changed_when: false
+  check_mode: no
+  register: _local_users_getent_group
+
+- name: Set users
+  set_fact:
+    local_users_passwd: '{{ _local_users_getent_passwd.stdout_lines|local_users_passwd_to_dict }}'
+    local_users_group: '{{ _local_users_getent_group.stdout_lines|local_users_group_to_dict }}'
+
+- name: Remove undefined user accounts in the managed UID range
+  user: 
+    name: '{{ item }}'
+    state: 'absent'
+  with_items: '{{ local_users_passwd|local_users_passwd_undefined_accounts(local_users_accounts)|local_users_passwd_managed_uids(local_users_managed_uids) }}'
+
+- name: Removed undefined groups in the managed GID range
+  group:
+    name: '{{ item }}'
+    state: 'absent'
+  with_items: '{{ local_users_group|local_users_group_undefined_groups(local_users_groups)|local_users_group_managed_gids(local_users_managed_gids) }}'
+
+- name: Manage Present User Accounts and Groups
+  include: present_default.yml

@@ -1,0 +1,10 @@
+---
+# vars file for shadow
+
+_local_users_managed_uids:
+  - min: 1000
+    max: 60000
+
+_local_users_managed_gids:
+  - min: 1000
+    max: 60000
