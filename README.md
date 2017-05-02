@@ -37,7 +37,8 @@ Role Variables
   * `state`
 
 * `local_users_managed_uids`: A list of dicts to specify the uid range of users to manage. 
-                              Remove users not configured in the specifed uid ranges
+                              Remove users not configured in the specifed uid ranges.
+    * Defaults: (Min: 1000, Max: 60000)
   * _min_,_max_: Specify a range of uids to manage
   * _uid_: Speicify a single uid to manage
 
@@ -49,7 +50,8 @@ Role Variables
   * `system`
 
 * `local_users_managed_gids`: A list of dicts to specify the gid range of groups to manage. 
-                             Remove groups not configured in the specifed gid ranges.
+                              Remove groups not configured in the specifed gid ranges.
+    * Defaults: (Min: 1000, Max: 60000)
   * _min_,_max_: Speicify a range of guids to manage
   * _gid_: Specify a single gid to manage
 
