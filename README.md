@@ -1,11 +1,16 @@
 LOCAL_USERS
 ===========
 
-Manage the local users and groups on a system. 
+Manage the local user accounts and groups on a system. 
 
-This role by default will removed any users and groups not configured for the system within the user (non system) uid 
-and gid range. This behaviour can be changed to not automatically remove users and groups or to manager more uids and
-gids.
+This role can be used to manage all accounts and groups on a system by removing unconfigured accounts and groups in a 
+set UID and GID range. By default the UID and GID range is none system accounts and groups. This behaviour can be 
+disabled.
+
+It can also be used to make sure the accounts and groups configured are as expected in the configuration by adding, 
+updating  or deleting them on the system.
+
+A script called passgen.py is provided to generate passwords.
 
 Requirements
 ------------
@@ -45,7 +50,7 @@ Role Variables
 
 ### Group Configuration Variables
 
-* `local_users_groups: A dictionary of groups which wrap the ansible group module
+* `local_users_groups`: A dictionary of groups which wrap the ansible group module
   * `gid`
   * `system`
 
